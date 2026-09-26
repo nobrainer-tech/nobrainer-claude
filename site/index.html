@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f3ee">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%232948b8'/%3E%3Cpath d='M18 32h28M32 18v28' stroke='white' stroke-width='6'/%3E%3C/svg%3E">
+  <meta name="description" content="Give Claude Code a clear lead role, three focused native agents and setup instructions you can inspect before they change.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <title>NoBrainer Claude | Opus 5.5, with focused agents</title>
+  <link rel="canonical" href="https://nobrainer.tech/claude/">
+  <link rel="preload" href="assets/claude.css" as="style">
+  <link rel="stylesheet" href="assets/claude.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="NoBrainer.tech">
+  <meta property="og:title" content="NoBrainer Claude | Opus 5.5, with focused agents">
+  <meta property="og:description" content="A careful Claude Code setup with a clear MAIN role, focused native agent definitions and a reviewable install plan.">
+  <meta property="og:url" content="https://nobrainer.tech/claude/">
+  <meta property="og:image" content="https://nobrainer.tech/claude/assets/social-card.png">
+  <meta property="og:image:secure_url" content="https://nobrainer.tech/claude/assets/social-card.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="NoBrainer Claude: Opus 5.5 leads focused Haiku Scout and Sonnet Builder and Reviewer agents.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="NoBrainer Claude | Opus 5.5, with focused agents">
+  <meta name="twitter:description" content="A careful Claude Code setup with a clear MAIN role, focused native agent definitions and a reviewable install plan.">
+  <meta name="twitter:image" content="https://nobrainer.tech/claude/assets/social-card.png">
+  <meta name="twitter:image:alt" content="NoBrainer Claude: Opus 5.5 leads focused Haiku Scout and Sonnet Builder and Reviewer agents.">
+  <script src="assets/claude.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="site-header">
+      <a class="wordmark" href="https://nobrainer.tech/" aria-label="nobrainer.tech/claude"><span>nobrainer<span class="domain-dot">.</span><strong>tech</strong></span><span class="product-path">/claude</span></a>
+      <a class="header-link" href="https://github.com/nobrainer-tech/nobrainer-claude">GitHub repository <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">A focused setup for Claude Code</p>
+          <h1 id="page-title">Let Opus lead.<br><span>Delegate with clear roles.</span></h1>
+          <p class="lead">Choose Opus 5.5 as MAIN when you want it. Then give Claude Code three native agent definitions: a Haiku Scout, a Sonnet Builder, and a Sonnet Reviewer. The setup leaves your current model and effort in place by default.</p>
+          <div class="hero-actions">
+            <button class="button button-primary" id="copy-prompt" data-copy-prompt type="button">Copy the setup prompt</button>
+            <a class="button button-secondary" href="https://github.com/nobrainer-tech/nobrainer-claude">Explore the repository</a>
+          </div>
+          <p class="hero-note">Claude Code 2.1.280 or newer is required for the supported Opus 5.5 setup. Model access and aliases depend on your account and provider.</p>
+        </div>
+
+        <figure class="orchestration" aria-labelledby="map-title">
+          <figcaption id="map-title">One MAIN session. Three focused agent definitions.</figcaption>
+          <div class="main-agent">
+            <span class="node-label">MAIN, selected by you</span>
+            <strong>Opus 5.5</strong>
+            <span>Frames the work and checks results</span>
+          </div>
+          <div class="agent-branch" aria-hidden="true"></div>
+          <ul class="agent-list">
+            <li class="agent-card">
+              <span class="agent-role">01 / SCOUT</span>
+              <strong>Haiku</strong>
+              <span>Find evidence and report the useful details</span>
+            </li>
+            <li class="agent-card">
+              <span class="agent-role">02 / BUILD</span>
+              <strong>Sonnet</strong>
+              <span>Handle a bounded implementation task</span>
+            </li>
+            <li class="agent-card">
+              <span class="agent-role">03 / REVIEW</span>
+              <strong>Sonnet</strong>
+              <span>Check a change against its acceptance criteria</span>
+            </li>
+          </ul>
+          <p class="diagram-note">MAIN decides what is useful to delegate. These are role definitions, not a promise that all agents run at once.</p>
+        </figure>
+      </section>
+
+      <section class="section" aria-labelledby="working-title">
+        <p class="eyebrow">A practical working pattern</p>
+        <h2 id="working-title">Keep the plan clear and the work focused.</h2>
+        <p class="section-lead">Claude Code keeps one MAIN session in charge. When a task can stand on its own, MAIN can assign a focused role, then review the result in context.</p>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="card-kicker">SCOUT</span>
+            <h3>Gather the evidence</h3>
+            <p>Use Haiku for a bounded search or fact-finding task. MAIN decides what matters before work continues.</p>
+          </article>
+          <article class="feature-card">
+            <span class="card-kicker">BUILDER</span>
+            <h3>Implement a clear slice</h3>
+            <p>Give Sonnet a defined area and outcome. MAIN integrates the result with the rest of the task.</p>
+          </article>
+          <article class="feature-card">
+            <span class="card-kicker">REVIEWER</span>
+            <h3>Check the acceptance bar</h3>
+            <p>Ask Sonnet to look for missed requirements and concrete defects. MAIN owns the final decision.</p>
+          </article>
+        </div>
+        <p class="callout"><strong>Model names are requests, not proof.</strong> Provider aliases and account access can differ. Read back the selected model in Claude Code before relying on a role assignment.</p>
+      </section>
+
+      <section class="section setup-section" aria-labelledby="setup-title">
+        <p class="eyebrow">Review first. Choose what changes.</p>
+        <h2 id="setup-title">Set up Claude Code on your terms.</h2>
+        <div class="setup-grid">
+          <div class="setup-copy">
+            <p class="section-lead">The installer previews its plan before it writes. It adds a managed block to your user <code>CLAUDE.md</code> and preserves the text around it.</p>
+            <ul class="setup-points">
+              <li><strong>Keep your current MAIN model and effort.</strong> Choose <code>--opus-main</code> only when you want Opus 5.5 selected as MAIN.</li>
+              <li><strong>Leave auto memory alone by default.</strong> Opt in with <code>--enable-auto-memory</code> only when you choose.</li>
+              <li><strong>Keep permission settings as they are.</strong> The setup does not enable permission bypass or experimental agent teams.</li>
+            </ul>
+            <p class="separate-flow"><code>nobrainer-tech-flow</code> is installed separately and required before this adapter. Follow the exact <a href="https://github.com/nobrainer-tech/nobrainer-claude/blob/main/docs/setup.md">setup instructions</a> to install it and verify Claude Code discovers its entry point.</p>
+            </div>
+            <ol class="install-steps" aria-label="Installation review steps">
+            <li><span>1</span><div><strong>Check the client and install the prerequisite</strong><small>Follow <a href="https://github.com/nobrainer-tech/nobrainer-claude/blob/main/docs/setup.md">docs/setup.md</a> to confirm version, install and verify <code>nobrainer-tech-flow</code>.</small></div></li>
+            <li><span>2</span><div><strong>Preview the adapter</strong><code>python3 install.py --check</code></div></li>
+            <li><span>3</span><div><strong>Review the plan</strong><small>Confirm the target files and your selected options.</small></div></li>
+            <li><span>4</span><div><strong>Apply your choice</strong><code>python3 install.py --apply</code></div></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section memory-section" aria-labelledby="memory-title">
+        <div>
+          <p class="eyebrow">Your instructions stay yours</p>
+          <h2 id="memory-title">Keep policy and memory distinct.</h2>
+        </div>
+        <div class="memory-copy">
+          <p>The managed <code>CLAUDE.md</code> block carries explicit setup guidance. Claude Code's native auto memory is optional and remains unchanged unless you ask to enable it. The installer does not write project <code>MEMORY.md</code> files or import private owner memory.</p>
+          <p>Backups and guarded restore help you inspect and recover installer-managed changes without replacing later edits.</p>
+        </div>
+      </section>
+
+      <section class="section start-section" id="start" aria-labelledby="start-title">
+        <div class="start-heading">
+          <p class="eyebrow">Install the prerequisite, then check</p>
+          <h2 id="start-title">Copy the prompt. Review the plan.</h2>
+          <p class="section-lead">The prompt sends Claude Code to the canonical <code>nobrainer-tech-flow</code> setup first, then asks it to preview the adapter plan before any adapter change.</p>
+        </div>
+        <div class="prompt-panel">
+          <div class="prompt-topline"><span>INSTALLATION PROMPT</span><span>Review before applying</span></div>
+          <pre><code id="install-prompt">Set up NoBrainer Claude from https://github.com/nobrainer-tech/nobrainer-claude. Read AGENTS.md, docs/spec.md, and docs/setup.md first. Confirm Claude Code is version 2.1.280 or newer. Follow docs/setup.md to install, validate, and verify Claude Code discovers the canonical nobrainer-tech-flow entry point before using this adapter. Then run python3 install.py --check and show me the complete read-only plan. Preserve my current MAIN model, effort, auto-memory state, permissions, and all text outside the managed CLAUDE.md block. Do not enable agent teams. Stop and wait for my approval before writing. If I approve, run python3 install.py --apply. Use --opus-main only if I explicitly choose Opus 5.5 as MAIN. Use --enable-auto-memory only if I explicitly opt in. Verify the readback and explain the backup and guarded restore. Do not claim unlocked context, a max mode, guaranteed concurrency, or guaranteed savings.</code></pre>
+          <div class="prompt-actions">
+            <button class="button button-primary" id="copy-prompt-bottom" data-copy-prompt type="button">Copy the setup prompt</button>
+            <p class="copy-status" id="copy-status" role="status" aria-live="polite" aria-atomic="true">You can also select and copy the prompt above.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="footer-wordmark" href="https://nobrainer.tech/" aria-label="NoBrainer.tech home">nobrainer<span>.</span><strong>tech</strong></a>
+      <p>An independent Claude Code adapter from NoBrainer.tech. Not an Anthropic partnership.</p>
+      <nav aria-label="Project links">
+        <a href="https://github.com/nobrainer-tech/nobrainer-claude">Repository</a>
+        <a href="https://github.com/nobrainer-tech/nobrainer-tech-flow">nobrainer-tech-flow</a>
+        <a href="https://nobrainer.tech/codex/">NoBrainer Codex</a>
+      </nav>
+    </footer>
+  </div>
+</body>
+</html>

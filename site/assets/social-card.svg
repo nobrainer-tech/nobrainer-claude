@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">NoBrainer.tech Claude Code setup</title>
+  <desc id="description">Opus 5.5 as MAIN, with focused Haiku Scout and Sonnet Builder and Reviewer agent definitions.</desc>
+  <rect width="1200" height="630" fill="#f4f3ee"/>
+  <rect x="46" y="46" width="1108" height="538" rx="34" fill="#faf9f6" stroke="#abb7cc" stroke-width="2"/>
+  <text x="96" y="112" fill="#202124" font-family="Arial, sans-serif" font-size="25" font-weight="700" letter-spacing="-1">nobrainer<tspan fill="#d94724">.</tspan><tspan fill="#2948b8">tech</tspan><tspan fill="#485162" font-size="19" font-weight="500">/claude</tspan></text>
+  <text x="96" y="188" fill="#ae381d" font-family="Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="2">A FOCUSED SETUP FOR CLAUDE CODE</text>
+  <text x="96" y="268" fill="#202124" font-family="Arial, sans-serif" font-size="58" font-weight="700" letter-spacing="-3">Let Opus lead.</text>
+  <text x="96" y="333" fill="#2948b8" font-family="Arial, sans-serif" font-size="43" font-weight="700" letter-spacing="-2">Delegate with clear roles.</text>
+  <text x="98" y="388" fill="#485162" font-family="Arial, sans-serif" font-size="19">One MAIN session, three focused native agent definitions.</text>
+  <rect x="97" y="438" width="227" height="54" rx="4" fill="#2948b8"/>
+  <text x="210" y="472" fill="#ffffff" font-family="Arial, sans-serif" font-size="16" font-weight="700" text-anchor="middle">Review before applying</text>
+  <rect x="745" y="151" width="326" height="108" rx="22" fill="#1d2430"/>
+  <rect x="745" y="151" width="5" height="108" rx="2" fill="#d94724"/>
+  <text x="775" y="185" fill="#c9d2e2" font-family="Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5">MAIN, SELECTED BY YOU</text>
+  <text x="775" y="225" fill="#f3eee6" font-family="Arial, sans-serif" font-size="31" font-weight="700">Opus 5.5</text>
+  <path d="M908 259v35M800 294h216M800 294v22m108-22v22m108-22v22" fill="none" stroke="#abb7cc" stroke-width="2"/>
+  <rect x="745" y="316" width="101" height="114" rx="15" fill="#fffcf7" stroke="#abb7cc"/>
+  <rect x="855" y="316" width="101" height="114" rx="15" fill="#fffcf7" stroke="#abb7cc"/>
+  <rect x="965" y="316" width="106" height="114" rx="15" fill="#fffcf7" stroke="#abb7cc"/>
+  <text x="760" y="345" fill="#ae381d" font-family="Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="1">SCOUT</text>
+  <text x="760" y="375" fill="#202124" font-family="Arial, sans-serif" font-size="17" font-weight="700">Haiku</text>
+  <text x="760" y="399" fill="#485162" font-family="Arial, sans-serif" font-size="11">Find evidence</text>
+  <text x="870" y="345" fill="#ae381d" font-family="Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="1">BUILD</text>
+  <text x="870" y="375" fill="#202124" font-family="Arial, sans-serif" font-size="17" font-weight="700">Sonnet</text>
+  <text x="870" y="399" fill="#485162" font-family="Arial, sans-serif" font-size="11">Build a slice</text>
+  <text x="980" y="345" fill="#ae381d" font-family="Arial, sans-serif" font-size="10" font-weight="700" letter-spacing="1">REVIEW</text>
+  <text x="980" y="375" fill="#202124" font-family="Arial, sans-serif" font-size="17" font-weight="700">Sonnet</text>
+  <text x="980" y="399" fill="#485162" font-family="Arial, sans-serif" font-size="11">Check the work</text>
+  <text x="745" y="466" fill="#485162" font-family="Arial, sans-serif" font-size="14">Focused roles, not guaranteed parallel work.</text>
+  <text x="745" y="494" fill="#485162" font-family="Arial, sans-serif" font-size="14">Your model and effort stay yours by default.</text>
+</svg>

@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.DS_Store
+.pytest_cache/
+*.local.json
+test-results/
+.qa-*
+/tasks/
