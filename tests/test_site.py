@@ -36,12 +36,19 @@ class SiteTests(unittest.TestCase):
     def test_shared_brand_typography_is_loaded_last(self):
         text = (ROOT / "site/index.html").read_text(encoding="utf-8")
         css = (ROOT / "site/assets/brand-typography.css").read_text(encoding="utf-8")
-        self.assertIn('href="assets/brand-typography.css?v=20260927"', text)
+        self.assertIn('href="assets/brand-typography.css?v=20260927-flow-header"', text)
         self.assertGreater(text.index("assets/brand-typography.css"), text.rfind("</style>"))
         self.assertIn("font-family: var(--font-brand)", css)
         self.assertIn("font-weight: 700", css)
         self.assertIn("clamp(54px, 6.15vw, 88px)", css)
-        self.assertIn("header .wordmark .product-path", css)
+        self.assertIn("header .brand .brand-flow", css)
+        self.assertIn("font-weight: 750", css)
+        self.assertIn('class="brand" href="#top"', text)
+        self.assertIn('<body id="top">', text)
+        self.assertIn('class="brand-dot"', text)
+        self.assertIn('<nav class="breadcrumbs" aria-label="Breadcrumb">', text)
+        self.assertIn('href="https://nobrainer.tech/">nobrainer.tech</a>', text)
+        self.assertIn('aria-current="page">NoBrainer Claude</li>', text)
         self.assertIn("@media (max-width: 360px)", css)
 
     def test_local_links_and_anchor_targets_resolve(self):

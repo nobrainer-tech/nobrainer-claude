@@ -31,7 +31,8 @@ Match the rendered English homepage at https://nobrainer.tech/, checked on 2026-
 - Font family: `-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`; no downloaded display font. Actual system face varies by operating system.
 - Hero heading: weight 700, size `clamp(54px, 6.15vw, 88px)`, line-height 1.02, letter-spacing -0.052em, word-spacing 0.025em.
 - At 900px and below: size `clamp(56px, 8.5vw, 80px)`. At 580px and below: 56px, line-height 1.03, tracking -0.042em. At 360px and below: 52px.
-- Header identity: 21px, weight 760, tracking -1px; 20px at 580px and below, 18px at 360px and below. Domain and product suffix inherit this typography instead of browser-default bold or smaller text.
+- Header identity follows https://flow.nobrainer.tech/ (owner correction, 2026-09-27): system font, 21px, weight 750, line-height 1.65, tracking -1px, antialiased rendering. Keep 21px on mobile and move the identity to its own header row at 700px and below. Domain is cobalt; stem and product path use the main ink. The orange domain dot is a 4px square with margins 0 2px 0 1px, not a text period.
+- The full identity links to `#top` on the current product page, with its full domain/path as the accessible name. Hover does not underline it; keyboard focus stays visible. A breadcrumb above the hero eyebrow links `nobrainer.tech` to the homepage and marks this product with `aria-current="page"`. Use 13px text, line-height 1.6, an 18px bottom gap and a slash separator with 10px spacing, matching Flow. No fabricated hierarchy or additional navigation destination.
 - Preserve product-specific wording and wrapping. Verify computed heading styles against the live homepage at matching viewports, plus mobile overflow and copy controls. A matching font-family declaration alone is not visual parity.
 
 ## Proof

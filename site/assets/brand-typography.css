@@ -11,22 +11,70 @@
   word-spacing: 0.025em;
 }
 
-header .brand,
-header .wordmark {
+header .brand {
+  display: inline-flex;
+  align-items: baseline;
+  color: var(--ink);
   font-family: var(--font-brand);
   font-size: 21px;
-  font-weight: 760;
+  font-weight: 750;
+  line-height: 1.65;
   letter-spacing: -1px;
+  white-space: nowrap;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
 }
 
-header .brand strong,
-header .brand em,
-header .wordmark strong,
-header .wordmark .product-path {
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  letter-spacing: inherit;
+header .brand .brand-domain { color: var(--blue); }
+header .brand .brand-flow { color: var(--ink); }
+header .brand .brand-dot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin: 0 2px 0 1px;
+  background: #d94724;
+}
+header .brand:hover,
+header .brand:focus-visible { text-decoration: none; }
+header .brand:focus-visible,
+.breadcrumbs a:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.breadcrumbs {
+  margin-bottom: 18px;
+  color: var(--muted);
+  font-family: var(--font-brand);
+  font-size: 13px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.breadcrumbs li { min-width: 0; overflow-wrap: anywhere; }
+.breadcrumbs li + li::before {
+  content: "/";
+  margin-right: 10px;
+  color: var(--muted);
+}
+.breadcrumbs a { color: var(--blue); text-decoration: none; }
+.breadcrumbs a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.breadcrumbs [aria-current="page"] { color: var(--ink); }
+
+@media (prefers-color-scheme: dark) {
+  header .brand .brand-dot { background: #ff9875; }
+}
+
+@media (max-width: 700px) {
+  header { flex-wrap: wrap; }
+  header .brand { flex: 1 0 100%; }
 }
 
 @media (max-width: 900px) {
@@ -39,12 +87,8 @@ header .wordmark .product-path {
     line-height: 1.03;
     letter-spacing: -0.042em;
   }
-  header .brand,
-  header .wordmark { font-size: 20px; }
 }
 
 @media (max-width: 360px) {
   .hero h1 { font-size: 52px; }
-  header .brand,
-  header .wordmark { font-size: 18px; }
 }
