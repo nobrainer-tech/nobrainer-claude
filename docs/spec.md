@@ -24,6 +24,16 @@ A developer can give Claude Code the public repository URL, inspect a read-only 
 
 Do not change the owner's live Claude installation or model settings while testing. Do not modify other dirty repositories, move data, copy provider keys, enable permission bypass, install legacy leaked-prompt skills, or publish social posts as part of this release.
 
+## Brand typography
+
+Match the rendered English homepage at https://nobrainer.tech/, checked on 2026-09-27, rather than an older generic Signature example. The shared product-page contract lives in `site/assets/brand-typography.css`, loaded after page styles. Keep this file identical in the Codex and Claude repositories.
+
+- Font family: `-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`; no downloaded display font. Actual system face varies by operating system.
+- Hero heading: weight 700, size `clamp(54px, 6.15vw, 88px)`, line-height 1.02, letter-spacing -0.052em, word-spacing 0.025em.
+- At 900px and below: size `clamp(56px, 8.5vw, 80px)`. At 580px and below: 56px, line-height 1.03, tracking -0.042em. At 360px and below: 52px.
+- Header identity: 21px, weight 760, tracking -1px; 20px at 580px and below, 18px at 360px and below. Domain and product suffix inherit this typography instead of browser-default bold or smaller text.
+- Preserve product-specific wording and wrapping. Verify computed heading styles against the live homepage at matching viewports, plus mobile overflow and copy controls. A matching font-family declaration alone is not visual parity.
+
 ## Proof
 
 Temporary-home tests cover preservation, repeat apply, conflicts, unsafe paths, rollback and restore drift. Inspect actual CLI discovery where available, without billing a model request. Browser checks cover mobile/desktop, images, copy feedback and overflow. Release proof requires exact GitHub commit/CI/release and public file hashes plus browser readback. No configuration test is described as an Opus 5.5 runtime task.
