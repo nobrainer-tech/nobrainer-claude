@@ -21,7 +21,7 @@ python3 install.py --check
 python3 install.py --apply
 ```
 
-If preflight reports nobrainer-tech-flow missing, follow [setup](docs/setup.md) first. Windows can use `py -3.11` instead of `python3`. For a nonstandard config directory use `--claude-dir PATH`; for a plugin-provided entry use `--flow-skill PATH/TO/SKILL.md` after verifying client discovery.
+If preflight reports nobrainer-tech-flow missing, follow [setup](docs/setup.md) first. Windows can use `py -3.11` instead of `python3`. For a nonstandard config directory use `--claude-dir PATH`; if `claude` is not on your `PATH`, pass `--claude-bin PATH`; for a plugin-provided entry use `--flow-skill PATH/TO/SKILL.md` after verifying client discovery.
 
 ## What changes
 

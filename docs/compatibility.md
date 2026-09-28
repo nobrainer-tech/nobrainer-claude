@@ -20,9 +20,10 @@ The installer preserves existing user imports and reports their presence. Check 
 
 - Source contract: checked against the official pages below.
 - Installer behavior: temporary-home preservation, conflicts, rollback and restore tests.
-- Local host preflight: the inspected host has Claude Code 2.1.241; the installer correctly reports the version blocker without writing.
+- Earlier local host preflight: that host had Claude Code 2.1.241; the installer correctly reported the version blocker without writing.
 - Opus 5.5 task execution: **not claimed by the configuration test suite**. Requires a compatible signed-in client, account entitlement and actual model readback.
 - An isolated attempt to acquire CLI 2.1.283 was refused by the test host's package-age policy. That policy was not bypassed. Native `doctor` ran only on the pre-existing 2.1.241 client in a separate config directory; it is not 5.5 runtime proof.
+- Client discovery on a current client (2026-09-28): Claude Code 2.1.284 on Linux, isolated configuration directory, session started against an unreachable local endpoint so no model request was made. The installer preflight passed, and after `--apply` the client's session initialization listed `nbc-scout`, `nbc-builder` and `nbc-reviewer`. This is discovery evidence only; it does not show Opus 5.5 access, model routing or delegation quality.
 - Published distribution and website: release-specific receipts are recorded in the release notes after external readback.
 
 ## Primary sources

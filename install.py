@@ -8,6 +8,7 @@ import json
 import os
 from pathlib import Path
 import re
+import shutil
 import stat
 import subprocess
 import sys
@@ -64,7 +65,11 @@ def safe_path(home: Path, relative: str) -> Path:
 
 
 def detect_version(binary: str) -> tuple[int, int, int]:
-    result = subprocess.run([binary, "--version"], capture_output=True, text=True, timeout=15, check=True)
+    # Resolve first: subprocess alone cannot find an npm-style claude.cmd shim on Windows.
+    resolved = shutil.which(binary)
+    if not resolved:
+        raise ValueError(f"Claude Code CLI not found: {binary}; install it or pass --claude-bin PATH")
+    result = subprocess.run([resolved, "--version"], capture_output=True, text=True, timeout=15, check=True)
     match = re.search(r"\b(\d+)\.(\d+)\.(\d+)\b", result.stdout)
     if not match:
         raise ValueError("Could not read the Claude Code version")
@@ -133,7 +138,10 @@ def plan_install(home: Path, version: tuple[int, int, int], opus_main=False, ena
                 raise ValueError(f"Agent name already exists elsewhere: {match.group(1)}")
     before = {name: path.read_bytes() if path.exists() else None for name, path in paths.items()}
     modes = {name: stat.S_IMODE(path.stat().st_mode) if path.exists() else 0o600 for name, path in paths.items()}
-    settings = read_json(before["settings.json"]) if before["settings.json"] is not None else {}
+    try:
+        settings = read_json(before["settings.json"]) if before["settings.json"] is not None else {}
+    except ValueError as error:
+        raise ValueError(f"settings.json is not valid JSON; fix it first ({error})") from error
     for key in ("model", "effortLevel"):
         if key in settings and not isinstance(settings[key], str):
             raise ValueError(f"settings.{key} must be a string")
@@ -352,7 +360,8 @@ def main() -> int:
     mode.add_argument("--check", action="store_true")
     mode.add_argument("--apply", action="store_true")
     mode.add_argument("--restore", type=Path, metavar="BACKUP")
-    parser.add_argument("--claude-dir", type=Path, default=Path(os.environ.get("CLAUDE_CONFIG_DIR", str(Path.home() / ".claude"))))
+    # An empty CLAUDE_CONFIG_DIR must not resolve to the current directory.
+    parser.add_argument("--claude-dir", type=Path, default=Path(os.environ.get("CLAUDE_CONFIG_DIR") or Path.home() / ".claude"))
     parser.add_argument("--claude-bin", default="claude")
     parser.add_argument("--flow-skill", type=Path)
     parser.add_argument("--opus-main", action="store_true", help="explicitly set the default model to claude-opus-5-5")
@@ -365,11 +374,13 @@ def main() -> int:
         print(json.dumps(restore(home, options.restore.expanduser()), indent=2))
         return 0
     plan = plan_install(home, detect_version(options.claude_bin), options.opus_main, options.enable_auto_memory, options.flow_skill)
-    if options.apply:
+    if options.apply and plan["summary"]["ready"]:
         backup = apply_plan(plan)
         plan["summary"]["backup"] = str(backup) if backup else None
         plan["summary"]["readback"] = "PASS"
     print(json.dumps(plan["summary"], indent=2, ensure_ascii=False))
+    if options.apply and not plan["summary"]["ready"]:
+        print("Setup stopped: nothing was written; resolve the blockers above first", file=sys.stderr)
     return 0 if plan["summary"]["ready"] else 2
 
 
