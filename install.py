@@ -72,7 +72,7 @@ def detect_version(binary: str) -> tuple[int, int, int]:
 
 
 def find_flow(home: Path, explicit: Path | None = None) -> str | None:
-    candidates = [explicit] if explicit else [home / "skills" / name / "SKILL.md" for name in ("nobrainer-tech-flow", "nobrainer-ultra")]
+    candidates = [explicit] if explicit else [home / "skills" / "nobrainer-tech-flow" / "SKILL.md"]
     for candidate in candidates:
         if candidate is None:
             continue
@@ -83,9 +83,9 @@ def find_flow(home: Path, explicit: Path | None = None) -> str | None:
             continue
         text = candidate.read_text(encoding="utf-8")
         header = re.match(r"\A---\r?\n(.*?)\r?\n---(?:\r?\n|$)", text, re.S)
-        match = re.search(r"^name:\s*[\"']?(nobrainer-tech-flow|nobrainer-ultra)[\"']?\s*$", header.group(1), re.M) if header else None
+        match = re.search(r"^name:\s*[\"']?nobrainer-tech-flow[\"']?\s*$", header.group(1), re.M) if header else None
         if match:
-            return match.group(1)
+            return "nobrainer-tech-flow"
     return None
 
 
@@ -167,7 +167,7 @@ def plan_install(home: Path, version: tuple[int, int, int], opus_main=False, ena
     after = dict(before)
     if changes:
         after["settings.json"] = (json.dumps(settings, indent=2, ensure_ascii=False) + "\n").encode()
-    memory = (ROOT / "templates/memory.md").read_text(encoding="utf-8").replace("{{FLOW_ENTRY}}", flow or "nobrainer-ultra")
+    memory = (ROOT / "templates/memory.md").read_text(encoding="utf-8").replace("{{FLOW_ENTRY}}", flow or "nobrainer-tech-flow")
     after["CLAUDE.md"] = merge_memory((before["CLAUDE.md"] or b"").decode("utf-8"), memory).encode()
     for name in AGENTS:
         relative = f"agents/{name}.md"

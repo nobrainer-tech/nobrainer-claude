@@ -93,6 +93,44 @@ class InstallTests(unittest.TestCase):
         self.assertFalse(plan["summary"]["ready"])
         self.assertTrue(any("nobrainer-tech-flow" in item for item in plan["summary"]["blockers"]))
 
+    def test_setup_guide_selects_a_current_stable_flow_commit(self):
+        setup = (ROOT / "docs/setup.md").read_text(encoding="utf-8")
+
+        self.assertIn("/releases/latest", setup)
+        self.assertIn("FLOW_COMMIT", setup)
+        self.assertIn("checkout --detach", setup)
+        self.assertNotIn("v1.14.1", setup)
+        self.assertNotIn("f39b0444d29febe00403a870d334b6292fe4a118", setup)
+
+    def test_legacy_ultra_entry_does_not_satisfy_current_flow_requirement(self):
+        self.flow_skill.unlink()
+        legacy = self.home / "skills" / "nobrainer-ultra" / "SKILL.md"
+        legacy.parent.mkdir(parents=True)
+        legacy.write_text(
+            "---\nname: nobrainer-ultra\ndescription: Historical Flow alias\n---\n",
+            encoding="utf-8",
+        )
+
+        plan = self.make_plan()
+
+        self.assertFalse(plan["summary"]["ready"])
+        self.assertIsNone(plan["summary"]["flow_entry"])
+        self.assertTrue(any("nobrainer-tech-flow" in item for item in plan["summary"]["blockers"]))
+
+    def test_explicit_legacy_ultra_path_is_rejected(self):
+        legacy = self.home / "legacy" / "SKILL.md"
+        legacy.parent.mkdir()
+        legacy.write_text(
+            "---\nname: nobrainer-ultra\ndescription: Historical Flow alias\n---\n",
+            encoding="utf-8",
+        )
+
+        plan = self.make_plan(flow_skill=legacy)
+
+        self.assertFalse(plan["summary"]["ready"])
+        self.assertIsNone(plan["summary"]["flow_entry"])
+        self.assertTrue(any("nobrainer-tech-flow" in item for item in plan["summary"]["blockers"]))
+
     def test_apply_is_idempotent(self):
         backup = self.apply()
         first_result = {

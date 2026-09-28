@@ -6,23 +6,28 @@ Run `claude --version`. The supported profile requires **2.1.280 or later**, the
 
 Read existing user and project `CLAUDE.md` files, imports, `.claude/agents` definitions and applicable managed settings. Existing instructions can outrank or conflict with this adapter. In particular, imported rules may route workers to models unavailable in Claude Code. Resolve that deliberately; this installer never rewrites imported files.
 
-## 2. Install the published nobrainer-tech-flow
+## 2. Install the latest stable nobrainer-tech-flow
 
-As verified on September 27, 2026, the latest published release is [v1.14.1](https://github.com/nobrainer-tech/nobrainer-tech-flow/releases/tag/v1.14.1), at commit `f39b0444d29febe00403a870d334b6292fe4a118`. Its technical entry point remains `nobrainer-ultra`. A newer working tree or planned version is not a published release.
-
-Review the source and release instructions before executing them. The commands below use that exact release as a reproducible baseline:
+Check the [latest stable release](https://github.com/nobrainer-tech/nobrainer-tech-flow/releases/latest) and its [canonical installation contract](https://github.com/nobrainer-tech/nobrainer-tech-flow/blob/main/docs/INSTALL.md) at setup time. On September 28, 2026, the latest-stable check returned **v2.0.0** at immutable commit `ce1bc2033482e222c70e3d365e76be57b8f2394c`. That is a dated readback, not a version to keep using after a newer stable release appears. Select the full commit SHA belonging to the latest stable release and set `FLOW_COMMIT` below before running the commands. Do not install a prerelease, floating branch, or historical `nobrainer-ultra` alias.
 
 ```bash
-git clone https://github.com/nobrainer-tech/nobrainer-tech-flow.git
-git -C nobrainer-tech-flow checkout --detach f39b0444d29febe00403a870d334b6292fe4a118
+FLOW_COMMIT="<full commit SHA for the latest stable release>"
+git clone --no-checkout https://github.com/nobrainer-tech/nobrainer-tech-flow.git
+git -C nobrainer-tech-flow checkout --detach "$FLOW_COMMIT"
+test "$(git -C nobrainer-tech-flow rev-parse HEAD)" = "$FLOW_COMMIT"
 python3 nobrainer-tech-flow/scripts/validate_skills.py --suite
 python3 nobrainer-tech-flow/scripts/install_skills.py --client claude --mode copy
+```
+
+The first installer run is a read-only preview. Inspect every target and conflict; apply only that same reviewed commit after the preview is clean:
+
+```bash
 python3 nobrainer-tech-flow/scripts/install_skills.py --client claude --mode copy --apply
 ```
 
-Stop if validation or preview fails. For a custom Claude config directory, pass the official Flow installer's `--dest PATH/skills` on both preview and apply. Use copy mode on Windows to avoid requiring symlink privileges. Review the [current canonical installation contract](https://github.com/nobrainer-tech/nobrainer-tech-flow/blob/main/docs/INSTALL.md) before selecting a newer release; never substitute a dirty private checkout.
+Stop if validation or preview fails. For a custom Claude config directory, pass the official Flow installer's `--dest PATH/skills` on both preview and apply. Use copy mode on Windows to avoid requiring symlink privileges. Preserve unrelated skills and instructions; never substitute a dirty private checkout.
 
-Restart Claude Code when required and verify that the installed entry point is discovered. The toolkit checks the installed `SKILL.md` name; that is file-level evidence, not client discovery.
+Restart Claude Code when required and verify that the exact installed Flow source is the selected release and the entry point is discovered. The NoBrainer Claude installer accepts only `name: nobrainer-tech-flow`; an old `nobrainer-ultra` file does not satisfy this prerequisite. A matching file is source evidence, not proof that a named workflow runs correctly in the client.
 
 ## 3. Preview and apply the adapter
 
