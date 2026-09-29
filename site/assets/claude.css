@@ -558,7 +558,7 @@ h2 {
 }
 
 .prompt-panel pre {
-  max-height: 220px;
+  max-height: 240px;
   overflow: auto;
   margin: 15px 0 18px;
   border: 1px solid #73809a;
