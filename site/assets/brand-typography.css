@@ -68,9 +68,7 @@ header .brand:focus-visible,
 .breadcrumbs a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .breadcrumbs [aria-current="page"] { color: var(--ink); }
 
-@media (prefers-color-scheme: dark) {
-  header .brand .brand-dot { background: #ff9875; }
-}
+:root[data-theme="dark"] header .brand .brand-dot { background: #ff9875; }
 
 @media (max-width: 700px) {
   header { flex-wrap: wrap; }
@@ -92,3 +90,11 @@ header .brand:focus-visible,
 @media (max-width: 360px) {
   .hero h1 { font-size: 52px; }
 }
+
+/* Light is the default; dark is the visitor's choice, remembered in this browser. */
+.theme-toggle { display: inline-grid; place-items: center; width: 36px; height: 36px; margin-left: 12px; padding: 0; border: 1px solid var(--line, var(--rule, #abb7cc)); background: transparent; color: var(--ink); cursor: pointer; flex: none; }
+.theme-toggle:hover, .theme-toggle:focus-visible { border-color: var(--blue); color: var(--blue); }
+.theme-toggle svg { width: 18px; height: 18px; }
+.theme-toggle .sun { display: none; }
+:root[data-theme="dark"] .theme-toggle .sun { display: block; }
+:root[data-theme="dark"] .theme-toggle .moon { display: none; }

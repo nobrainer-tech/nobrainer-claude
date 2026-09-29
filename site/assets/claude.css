@@ -13,8 +13,7 @@
   --shadow: 0 2px 4px #17294314, 0 9px 22px #17294320;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
+:root[data-theme="dark"] {
     color-scheme: dark;
     --canvas: #171b23;
     --paper: #202127;
@@ -28,7 +27,6 @@
     --line: #73809a;
     --shadow: 0 3px 8px #0006, 0 12px 26px #0005;
   }
-}
 
 * {
   box-sizing: border-box;
