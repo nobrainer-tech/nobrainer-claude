@@ -72,6 +72,16 @@ class SiteTests(unittest.TestCase):
         self.assertIn("install-prompt", parser.ids)
         self.assertIn("copy-status", parser.ids)
 
+    def test_install_prompt_defers_to_the_readme(self):
+        text = (SITE / "index.html").read_text(encoding="utf-8")
+        prompt = text.split('<code id="install-prompt">', 1)[1].split("</code>", 1)[0]
+        self.assertTrue(prompt.startswith("Install NoBrainer Claude from https://github.com/nobrainer-tech/nobrainer-claude\nor update it"))
+        self.assertIn("Read the install section of its README", prompt)
+        # The README owns the commands and requirements, so the prompt names no script, flag or version that could go stale.
+        self.assertNotIn("install.py", prompt)
+        self.assertNotIn("--", prompt)
+        self.assertNotRegex(prompt, r"\d+\.\d+")
+
     def test_social_image_matches_metadata(self):
         parser = Page()
         parser.feed((SITE / "index.html").read_text(encoding="utf-8"))

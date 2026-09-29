@@ -9,8 +9,8 @@
   <meta name="robots" content="index,follow,max-image-preview:large">
   <title>NoBrainer Claude | Opus 5.5, with focused agents</title>
   <link rel="canonical" href="https://nobrainer.tech/claude/">
-  <link rel="preload" href="assets/claude.css" as="style">
-  <link rel="stylesheet" href="assets/claude.css">
+  <link rel="preload" href="assets/claude.css?v=20260929" as="style">
+  <link rel="stylesheet" href="assets/claude.css?v=20260929">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="NoBrainer.tech">
   <meta property="og:title" content="NoBrainer Claude | Opus 5.5, with focused agents">
@@ -141,11 +141,20 @@
         <div class="start-heading">
           <p class="eyebrow">Install the prerequisite, then check</p>
           <h2 id="start-title">Copy the prompt. Review the plan.</h2>
-          <p class="section-lead">The prompt sends Claude Code to the canonical <code>nobrainer-tech-flow</code> setup first, then asks it to preview the adapter plan before any adapter change.</p>
+          <p class="section-lead">The prompt points Claude Code to the install method in the README: <code>nobrainer-tech-flow</code> first, then a preview of the adapter plan before any change. The same prompt installs and updates.</p>
         </div>
         <div class="prompt-panel">
           <div class="prompt-topline"><span>INSTALLATION PROMPT</span><span>Review before applying</span></div>
-          <pre><code id="install-prompt">Set up NoBrainer Claude from https://github.com/nobrainer-tech/nobrainer-claude. Read AGENTS.md, docs/spec.md, and docs/setup.md first. Confirm Claude Code is version 2.1.280 or newer. Follow docs/setup.md to install, validate, and verify Claude Code discovers the canonical nobrainer-tech-flow entry point before using this adapter. Then run python3 install.py --check and show me the complete read-only plan. Preserve my current MAIN model, effort, auto-memory state, permissions, and all text outside the managed CLAUDE.md block. Do not enable agent teams. Stop and wait for my approval before writing. If I approve, run python3 install.py --apply. Use --opus-main only if I explicitly choose Opus 5.5 as MAIN. Use --enable-auto-memory only if I explicitly opt in. Verify the readback and explain the backup and guarded restore. Do not claim unlocked context, a max mode, guaranteed concurrency, or guaranteed savings.</code></pre>
+          <pre><code id="install-prompt">Install NoBrainer Claude from https://github.com/nobrainer-tech/nobrainer-claude
+or update it if it is already installed.
+
+1. Keep a copy in ~/.nobrainer-claude: clone the repository there, or run
+   git pull there if it already exists.
+2. Read the install section of its README and follow the method it gives for
+   your operating system, including its prerequisites.
+3. Preview first and show me what will change. Apply only after I agree, and
+   do not edit my files beyond what that method does.
+4. Tell me the undo command, and whether I need to restart you.</code></pre>
           <div class="prompt-actions">
             <button class="button button-primary" id="copy-prompt-bottom" data-copy-prompt type="button">Copy the setup prompt</button>
             <p class="copy-status" id="copy-status" role="status" aria-live="polite" aria-atomic="true">You can also select and copy the prompt above.</p>
