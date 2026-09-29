@@ -51,13 +51,15 @@ flowchart TD
 Choose these deliberately and preview with the **same flags** before applying:
 
 ```bash
-python3 install.py --check --opus-main --enable-auto-memory
-python3 install.py --apply --opus-main --enable-auto-memory
+python3 install.py --check --opus-main --enable-auto-memory --raise-skill-budget
+python3 install.py --apply --opus-main --enable-auto-memory --raise-skill-budget
 ```
 
 `--opus-main` writes `model: claude-opus-5-5`. It does not change `effortLevel`. Custom provider/model environment overrides stop this preset rather than silently routing somewhere else. To try Opus in just one session, use the native `claude --model claude-opus-5-5` command instead.
 
 Auto memory is already on by default in current Claude Code. `--enable-auto-memory` is useful if you previously disabled it; it is not a hidden feature unlock. [Memory and routing](docs/compatibility.md) explains the distinction from `CLAUDE.md` and the checks after installation.
+
+`--raise-skill-budget` writes `skillListingBudgetFraction: 0.02`. Claude Code lists every skill name but drops the descriptions of the least-used skills once the listing passes 1% of the context window (about 8 KB for a 200k-token window). The eighteen nobrainer-tech-flow descriptions alone are about 5 KB, so next to other skills Claude may see only their names and be less likely to pick one on its own. The higher budget keeps more descriptions visible and costs more context on every turn, so it is opt-in. A larger context window or an existing value of 0.02 or more needs no change; a fixed `SLASH_COMMAND_TOOL_CHAR_BUDGET` overrides the fraction and stops this option. Check the result with `/context` or `/doctor`.
 
 ## Undo
 
