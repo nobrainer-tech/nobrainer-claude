@@ -19,7 +19,8 @@ ROOT = Path(__file__).resolve().parent
 START = "<!-- NOBRAINER-CLAUDE:START -->"
 END = "<!-- NOBRAINER-CLAUDE:END -->"
 MINIMUM = (2, 1, 280)
-AGENTS = ("nbc-scout", "nbc-builder", "nbc-reviewer")
+SKILL_LISTING_FRACTION = 0.02
+AGENTS =("nbc-scout", "nbc-builder", "nbc-reviewer")
 OWNED_PATHS = {"CLAUDE.md", "settings.json", *(f"agents/{name}.md" for name in AGENTS)}
 UNCHECKED = object()
 
@@ -122,7 +123,7 @@ def owned_agent(payload: bytes, name: str) -> bool:
     return len(names) == 1 and names[0] in (name, f'"{name}"', f"'{name}'")
 
 
-def plan_install(home: Path, version: tuple[int, int, int], opus_main=False, enable_auto_memory=False, flow_skill=None) -> dict:
+def plan_install(home: Path, version: tuple[int, int, int], opus_main=False, enable_auto_memory=False, flow_skill=None, raise_skill_budget=False) -> dict:
     if not home.is_dir():
         raise ValueError("An existing Claude configuration directory is required")
     home = home.resolve()
@@ -172,6 +173,15 @@ def plan_install(home: Path, version: tuple[int, int, int], opus_main=False, ena
         if settings.get("autoMemoryEnabled") is not True:
             changes["autoMemoryEnabled"] = {"before": settings.get("autoMemoryEnabled"), "after": True}
             settings["autoMemoryEnabled"] = True
+    if raise_skill_budget:
+        current = settings.get("skillListingBudgetFraction")
+        if current is not None and (isinstance(current, bool) or not isinstance(current, (int, float))):
+            raise ValueError("settings.skillListingBudgetFraction must be a number")
+        if enabled(environment.get("SLASH_COMMAND_TOOL_CHAR_BUDGET")) or enabled(os.environ.get("SLASH_COMMAND_TOOL_CHAR_BUDGET")):
+            blockers.append("A fixed SLASH_COMMAND_TOOL_CHAR_BUDGET overrides the listing fraction; raise that value instead")
+        if current is None or current < SKILL_LISTING_FRACTION:
+            changes["skillListingBudgetFraction"] = {"before": current, "after": SKILL_LISTING_FRACTION}
+            settings["skillListingBudgetFraction"] = SKILL_LISTING_FRACTION
     after = dict(before)
     if changes:
         after["settings.json"] = (json.dumps(settings, indent=2, ensure_ascii=False) + "\n").encode()
@@ -366,14 +376,15 @@ def main() -> int:
     parser.add_argument("--flow-skill", type=Path)
     parser.add_argument("--opus-main", action="store_true", help="explicitly set the default model to claude-opus-5-5")
     parser.add_argument("--enable-auto-memory", action="store_true", help="explicitly enable Claude Code native auto memory")
+    parser.add_argument("--raise-skill-budget", action="store_true", help="explicitly raise the skill listing budget to 2%% of the context window so installed skill descriptions stay visible")
     options = parser.parse_args()
     home = options.claude_dir.expanduser()
     if options.restore:
-        if options.opus_main or options.enable_auto_memory:
+        if options.opus_main or options.enable_auto_memory or options.raise_skill_budget:
             parser.error("Restore cannot be combined with setup changes")
         print(json.dumps(restore(home, options.restore.expanduser()), indent=2))
         return 0
-    plan = plan_install(home, detect_version(options.claude_bin), options.opus_main, options.enable_auto_memory, options.flow_skill)
+    plan = plan_install(home, detect_version(options.claude_bin), options.opus_main, options.enable_auto_memory, options.flow_skill, options.raise_skill_budget)
     if options.apply and plan["summary"]["ready"]:
         backup = apply_plan(plan)
         plan["summary"]["backup"] = str(backup) if backup else None

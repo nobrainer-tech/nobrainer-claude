@@ -9,6 +9,7 @@ Verified documentation baseline: September 27, 2026.
 | Workers | Native user agent Markdown with `tools`, `model` and `maxTurns`. Haiku scouts; Sonnet builds and reviews. No recursive delegation tool is granted. |
 | Permissions | Scout/reviewer receive Read, Glob and Grep. Builder also receives Edit, Write and Bash under the existing permission system. Prompt rules do not sandbox Bash. |
 | Memory | `CLAUDE.md` is explicit instruction memory. Native auto memory is separate and normally enabled by Claude Code. This tool only enables it on an explicit flag. |
+| Skill listing | Claude Code always lists every skill name and drops the descriptions of the least-used skills once the listing passes its budget (1% of the context window by default). This tool changes `skillListingBudgetFraction` only with `--raise-skill-budget`; a fixed `SLASH_COMMAND_TOOL_CHAR_BUDGET` overrides the fraction and blocks the option. Higher budgets cost context on every turn. |
 | Teams | Experimental agent teams remain untouched. They are a separate coordination model, not necessary for these workers. |
 | Platforms | Standard-library Python 3.11+; CI exercises Linux, macOS and Windows. Model availability is not established by cross-platform unit tests. |
 
@@ -24,6 +25,7 @@ The installer preserves existing user imports and reports their presence. Check 
 - Opus 5.5 task execution: **not claimed by the configuration test suite**. Requires a compatible signed-in client, account entitlement and actual model readback.
 - An isolated attempt to acquire CLI 2.1.283 was refused by the test host's package-age policy. That policy was not bypassed. Native `doctor` ran only on the pre-existing 2.1.241 client in a separate config directory; it is not 5.5 runtime proof.
 - Client discovery on a current client (2026-09-28): Claude Code 2.1.284 on Linux, isolated configuration directory, session started against an unreachable local endpoint so no model request was made. The installer preflight passed, and after `--apply` the client's session initialization listed `nbc-scout`, `nbc-builder` and `nbc-reviewer`. This is discovery evidence only; it does not show Opus 5.5 access, model routing or delegation quality.
+- Skill listing (2026-09-28, Claude Code 2.1.284, request captured by a local stand-in API, no real model request): in a session that also carried about 30 other skills, all eighteen nobrainer-tech-flow skills reached the model as names only at the default budget. After `--raise-skill-budget`, sixteen kept their descriptions; the other two lost out to roughly fifteen further plugin skills in that session. This shows the effect the option addresses; it is not a measurement of routing quality.
 - Published distribution and website: release-specific receipts are recorded in the release notes after external readback.
 
 ## Primary sources
@@ -32,6 +34,7 @@ The installer preserves existing user imports and reports their presence. Check 
 - [Custom subagents](https://code.claude.com/docs/en/sub-agents): definitions, tool scope, model selection and memory side effects.
 - [Memory](https://code.claude.com/docs/en/memory): explicit instructions, native auto memory and storage behavior.
 - [Settings](https://code.claude.com/docs/en/settings): settings scopes and supported fields.
+- [Skills](https://code.claude.com/docs/en/skills#skill-descriptions-are-cut-short) and [Settings reference](https://code.claude.com/docs/en/settings-reference#skilllistingbudgetfraction): listing budget, description cap and overrides.
 - [Agent teams](https://code.claude.com/docs/en/agent-teams): optional experimental coordination.
 - [Permissions](https://code.claude.com/docs/en/permissions): permission rules and enforcement.
 - [nobrainer-tech-flow installation](https://github.com/nobrainer-tech/nobrainer-tech-flow/blob/main/docs/INSTALL.md): canonical workflow distribution, preview and conflicts.
